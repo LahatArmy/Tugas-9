@@ -1,18 +1,37 @@
 #include<iostream>
 #include<iomanip> 
-using namespace std;
+// Deklarasi Global Variable
+int panjang = 10;
 
-main() 
+// Function untuk generate 1d Array
+int *generateArray(int number)
 {
-	int angka = 3;
+  int *numbersList = new int[panjang];
 
-	for(int i = 1; i <= 10; i++) {
+  for (int i = 0; i < panjang; i++) {
+    numbersList[i] = number + i;
+  }
 
-		for(int j = 0; j < i; j++) {
+  return numbersList;
+}
 
-			cout<<setw(2)<<angka + j<<" ";
-		}
-		cout<<endl;
-		angka += 2;
-	}
+int main()
+{
+  int **array2d = new int*[panjang];
+  for (int i = 1; i <= panjang; i++) {
+    array2d[i - 1] = new int[panjang];
+    /*
+      Save 1d Arrays into 2d Array
+      Formula = 2i + 1
+    */
+    array2d[i - 1] = generateArray(2 * i + 1);
+  }
+
+  // Print 2d Array
+  for (int i = 1; i <= panjang; i++) {
+    for (int j = 0; j < i; j++) {
+      cout << array2d[i - 1][j] << " ";
+    }
+    cout << endl;
+  }
 }
